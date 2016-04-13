@@ -78,9 +78,9 @@ namespace u2accel
         public override string ToString()
         {
             if(isKms)
-                return a + " km/h - " + b + " km/h in " + Time.ToString("F2") + " s";
+                return a.ToString("F0") + " km/h - " + b.ToString("F0") + " km/h in " + Time.ToString("F2") + " s";
 
-            return a*modifier + " mph - " + b*modifier + " mph in " + Time.ToString("F2")  + " s";
+            return (a/modifier).ToString("F0") + " mph - " + (b/modifier).ToString("F0") + " mph in " + Time.ToString("F2")  + " s";
         }
 
         public static void SaveRanges(Range[] ranges, string path)
@@ -96,7 +96,7 @@ namespace u2accel
             sr.Close();
         }
 
-        public static Range[] LoadRanges(string path)
+        public static Range[] LoadRanges(string path, int tickLength, bool isKmh)
         {
             StreamReader sr = new StreamReader(path);
             BinaryReader reader = new BinaryReader(sr.BaseStream);
@@ -104,7 +104,7 @@ namespace u2accel
             Range[] result = new Range[rangesCount];
             for(int i=0; i<rangesCount; i++)
             {
-                result[i] = new Range(reader.ReadSingle(), reader.ReadSingle(), 10, true);
+                result[i] = new Range(reader.ReadSingle(), reader.ReadSingle(), tickLength, isKmh);
             }
             sr.Close();
             return result;

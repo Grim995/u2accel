@@ -14,6 +14,7 @@ namespace u2accel
     public partial class MainForm : Form
     {
         U2Reader u2reader;
+        Settings settings;
         float prevSpeed = 0;
         float speed = 0;
         int frameCounter = 0;
@@ -28,7 +29,7 @@ namespace u2accel
         private void ReloadRanges()
         {
             listBox1.Items.Clear();
-            ranges = Range.LoadRanges("ranges/u2.urf");
+            ranges = Range.LoadRanges("ranges/u2.urf", 10, settings.IsKmh);
             for (int i = 0; i < ranges.Length; i++)
                 listBox1.Items.Add(ranges[i]);
         }
@@ -41,6 +42,7 @@ namespace u2accel
         private void MainForm_Load(object sender, EventArgs e)
         {
             report = new Report();
+            ReloadSettings();
             ReloadRanges();
             u2reader = new U2Reader();
             u2reader.Init();
@@ -104,6 +106,19 @@ namespace u2accel
             StreamWriter writer = new StreamWriter(saveFileDialog1.FileName);
             writer.Write(report.ReportString);
             writer.Close();
+        }
+
+        private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SettingsForm settings = new SettingsForm();
+            settings.ShowDialog();
+            ReloadSettings();
+            ReloadRanges();
+        }
+
+        private void ReloadSettings()
+        {
+            settings = new Settings();
         }
     }
 }

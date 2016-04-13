@@ -13,6 +13,7 @@ namespace u2accel
     public partial class RangesEditForm : Form
     {
         private float divider;
+        Settings settings;
 
         public RangesEditForm(bool isKmh)
         {
@@ -22,7 +23,8 @@ namespace u2accel
 
         private void RangesEditForm_Load(object sender, EventArgs e)
         {
-            Range[] ranges = Range.LoadRanges("ranges/u2.urf");
+            settings = new Settings();
+            Range[] ranges = Range.LoadRanges("ranges/u2.urf", 10, settings.IsKmh);
             for (int i = 0; i < ranges.Length; i++)
                 listBox1.Items.Add(ranges[i]);
         }
@@ -47,8 +49,8 @@ namespace u2accel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int a, b;
-            if(!int.TryParse(textBox1.Text, out a) || !int.TryParse(textBox2.Text, out b))
+            float a, b;
+            if(!float.TryParse(textBox1.Text, out a) || !float.TryParse(textBox2.Text, out b))
             {
                 MessageBox.Show("Invalid range arguments!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox1.Clear();
@@ -62,7 +64,12 @@ namespace u2accel
                 textBox2.Clear();
                 return;
             }
-            Range r = new Range(a, b, 10, true);
+            if(!settings.IsKmh)
+            {
+                a *= 1.61f;
+                b *= 1.61f;
+            }
+            Range r = new Range(a, b, 10, settings.IsKmh);
             listBox1.Items.Add(r);
         }
 
