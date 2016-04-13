@@ -14,11 +14,11 @@ Because speedrunning. We need to test some stuff, so I thought this would be a g
 - Make custom measuring ranges
 - Global hotkey to reset calculations
 - Build a report based on all your attempts
+- Customazible hotkey
+- MPH support
 
 ## TODO List:
 
-- Customazible hotkey
-- MPH support
 - U1 support
 - MW Support
 - Carbon support
