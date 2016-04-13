@@ -68,15 +68,7 @@ namespace u2accel
             speed = u2reader.GetSpeed() * 1.61f;
             foreach(Range range in ranges)
             {
-                /*if (speed == 0)
-                    range.Reset();*/
-
                 range.Think(speed, frameCounter);
-
-                /*if (speed >= range.LowerBorder)
-                    range.EnterFrame = frameCounter;
-                if (speed >= range.UpperBorder)
-                    range.LeaveFrame = frameCounter;*/
             }
             for(int i=0; i<listBox1.Items.Count; i++)
             {
@@ -100,7 +92,7 @@ namespace u2accel
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Coming soon!");
         }
     }
 }
