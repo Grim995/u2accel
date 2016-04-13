@@ -122,7 +122,7 @@ namespace u2accel
 
         public void Think(float speed, int tickNumber)
         {
-            if((lastSpeed <= a) && speed >= a)
+            if((lastSpeed <= a) && (speed >= a) && (bFrame == 0))
             {
                 aFrame = tickNumber;
             }

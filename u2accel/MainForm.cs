@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace u2accel
         int frameCounter = 0;
 
         Range[] ranges;
+        Report report;
 
 
         const string speedLabel = "Current speed: {0} km/h";
@@ -38,6 +40,7 @@ namespace u2accel
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            report = new Report();
             ReloadRanges();
             u2reader = new U2Reader();
             u2reader.Init();
@@ -48,11 +51,12 @@ namespace u2accel
         {
             if (e.KeyData == Keys.NumPad0)
             {
+                Reset();
+                report.AddSection(ranges);
                 foreach (Range r in ranges)
                 {
                     r.Reset();
                 }
-                Reset();
             }
         }
 
@@ -92,7 +96,14 @@ namespace u2accel
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming soon!");
+            if(saveFileDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            StreamWriter writer = new StreamWriter(saveFileDialog1.FileName);
+            writer.Write(report.ReportString);
+            writer.Close();
         }
     }
 }
