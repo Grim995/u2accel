@@ -51,7 +51,7 @@ namespace u2accel
 
         private void OnGlobalKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.NumPad0)
+            if (e.KeyCode == (Keys)settings.KeyCode)
             {
                 Reset();
                 report.AddSection(ranges);
