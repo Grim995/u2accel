@@ -15,7 +15,7 @@ Because speedrunning. We need to test some stuff, so I thought this would be a g
 - Global hotkey to reset calculations
 - Build a report based on all your attempts
 - Customazible hotkey
-- MPH support
+- Supports MPH
 
 ## TODO List:
 

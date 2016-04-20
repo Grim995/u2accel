@@ -54,7 +54,15 @@ namespace u2accel
             if (e.KeyCode == (Keys)settings.KeyCode)
             {
                 Reset();
-                report.AddSection(ranges);
+                bool shouldReport = true;
+                foreach(Range range in ranges)
+                {
+                    if (range.Time != 0.0f)
+                        continue;
+                    shouldReport = false;
+                }
+                if(shouldReport)
+                    report.AddSection(ranges);
                 foreach (Range r in ranges)
                 {
                     r.Reset();
