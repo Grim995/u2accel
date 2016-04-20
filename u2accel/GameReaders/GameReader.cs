@@ -13,6 +13,8 @@ namespace u2accel
         protected string name;
         bool initialized;
 
+        public int GameId;
+
         public GameReader()
         {
             initialized = false;

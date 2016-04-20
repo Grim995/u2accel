@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace u2accel
+namespace u2accel.GameReaders
 {
-    class U2Reader : GameReader
+    class CReader : GameReader
     {
         new public int GameId
         {
             get
             {
-                return 1;
+                return 2;
             }
         }
 
-        public U2Reader() : base()
+        public CReader() : base()
         {
-            speedAddress = 0x007F09E8;
-            name = "speed2";
+            speedAddress = 0x00A8E610;
+            name = "nfsc";
         }
     }
 }

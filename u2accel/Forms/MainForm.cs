@@ -24,6 +24,7 @@ namespace u2accel
 
 
         const string speedLabel = "Current speed: {0} km/h";
+        const string speedLabelMph = "Current speed: {0} MPH";
 
 
         private void ReloadRanges()
@@ -89,7 +90,7 @@ namespace u2accel
                 listBox1.Items[i] = listBox1.Items[i];
             }
 
-            label1.Text = string.Format(speedLabel, (int)speed);
+            label1.Text = string.Format(settings.IsKmh ? speedLabel : speedLabelMph, (int)speed);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
