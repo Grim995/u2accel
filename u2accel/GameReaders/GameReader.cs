@@ -1,30 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace u2accel
 {
-    class U2Reader
+    abstract class GameReader
     {
-        GameProcess speed2;
-        private const int speedAddress = 0x007F09E8;
+        GameProcess gameProcess;
+        protected int speedAddress;
+        protected string name;
         bool initialized;
 
-        public U2Reader()
+        public GameReader()
         {
             initialized = false;
         }
 
+        /// <summary>
+        /// Initialaze async, waiting for the game to be launched if needed
+        /// </summary>
         public async void Init()
         {
-            speed2 = await GameProcess.OpenGameProcessAsync("speed2");
+            gameProcess = await GameProcess.OpenGameProcessAsync(name);
             initialized = true;
         }
 
+        /// <summary>
+        /// Return current in-game speed in MPH
+        /// </summary>
+        /// <returns></returns>
         public float GetSpeed()
         {
             if (!initialized)
@@ -34,7 +40,7 @@ namespace u2accel
             byte[] buffer = new byte[4];
 
 
-            buffer = speed2.ReadMemory(speedAddress, 4, ref bytesRead); // ReadProcessMemory((int)speed2Handle, speedAddress, buffer, buffer.Length, ref bytesRead);
+            buffer = gameProcess.ReadMemory(speedAddress, 4, ref bytesRead);
             return BitConverter.ToSingle(buffer, 0);
         }
     }

@@ -53,6 +53,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GameProcess.cs" />
+    <Compile Include="GameReaders\GameReader.cs" />
     <Compile Include="KeyHook.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -71,7 +72,7 @@
     </Compile>
     <Compile Include="Report.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="U2Reader.cs" />
+    <Compile Include="GameReaders\U2Reader.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
