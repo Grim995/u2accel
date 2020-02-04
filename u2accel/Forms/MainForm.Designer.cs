@@ -39,11 +39,14 @@
             this.editRangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.needForSpeedUnderground2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.needForSpeedMostWantedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.needForSpeedCarbonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.latencyLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +63,7 @@
             // timer
             // 
             this.timer.Enabled = true;
-            this.timer.Interval = 10;
+            this.timer.Interval = 1;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // menuStrip1
@@ -125,9 +128,39 @@
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem1_Click);
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.needForSpeedUnderground2ToolStripMenuItem,
+            this.needForSpeedMostWantedToolStripMenuItem,
+            this.needForSpeedCarbonToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gameToolStripMenuItem.Text = "Game";
+            // 
+            // needForSpeedUnderground2ToolStripMenuItem
+            // 
+            this.needForSpeedUnderground2ToolStripMenuItem.Name = "needForSpeedUnderground2ToolStripMenuItem";
+            this.needForSpeedUnderground2ToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.needForSpeedUnderground2ToolStripMenuItem.Text = "Need for Speed: Underground 2";
+            // 
+            // needForSpeedMostWantedToolStripMenuItem
+            // 
+            this.needForSpeedMostWantedToolStripMenuItem.Name = "needForSpeedMostWantedToolStripMenuItem";
+            this.needForSpeedMostWantedToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.needForSpeedMostWantedToolStripMenuItem.Text = "Need for Speed: Most Wanted";
+            this.needForSpeedMostWantedToolStripMenuItem.Click += new System.EventHandler(this.needForSpeedMostWantedToolStripMenuItem_Click);
+            // 
+            // needForSpeedCarbonToolStripMenuItem
+            // 
+            this.needForSpeedCarbonToolStripMenuItem.Name = "needForSpeedCarbonToolStripMenuItem";
+            this.needForSpeedCarbonToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.needForSpeedCarbonToolStripMenuItem.Text = "Need for Speed: Carbon";
+            this.needForSpeedCarbonToolStripMenuItem.Click += new System.EventHandler(this.needForSpeedCarbonToolStripMenuItem_Click);
             // 
             // listBox1
             // 
@@ -141,32 +174,32 @@
             // 
             this.saveFileDialog1.Filter = "TXT files|*.txt";
             // 
-            // gameToolStripMenuItem
+            // label2
             // 
-            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.needForSpeedUnderground2ToolStripMenuItem,
-            this.needForSpeedCarbonToolStripMenuItem});
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.gameToolStripMenuItem.Text = "Game";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(12, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(185, 25);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Max speed (mph):";
             // 
-            // needForSpeedUnderground2ToolStripMenuItem
+            // latencyLabel
             // 
-            this.needForSpeedUnderground2ToolStripMenuItem.Name = "needForSpeedUnderground2ToolStripMenuItem";
-            this.needForSpeedUnderground2ToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.needForSpeedUnderground2ToolStripMenuItem.Text = "Need for Speed: Underground 2";
-            // 
-            // needForSpeedCarbonToolStripMenuItem
-            // 
-            this.needForSpeedCarbonToolStripMenuItem.Name = "needForSpeedCarbonToolStripMenuItem";
-            this.needForSpeedCarbonToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.needForSpeedCarbonToolStripMenuItem.Text = "Need for Speed: Carbon";
+            this.latencyLabel.AutoSize = true;
+            this.latencyLabel.Location = new System.Drawing.Point(9, 331);
+            this.latencyLabel.Name = "latencyLabel";
+            this.latencyLabel.Size = new System.Drawing.Size(61, 13);
+            this.latencyLabel.TabIndex = 6;
+            this.latencyLabel.Text = "Latency ms";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(308, 345);
+            this.Controls.Add(this.latencyLabel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
@@ -200,6 +233,9 @@
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem needForSpeedUnderground2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem needForSpeedCarbonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem needForSpeedMostWantedToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label latencyLabel;
     }
 }
 

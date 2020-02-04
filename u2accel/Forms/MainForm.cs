@@ -13,19 +13,25 @@ namespace u2accel
 {
     public partial class MainForm : Form
     {
-        U2Reader u2reader;
+        GameReader u2reader;
         Settings settings;
         float prevSpeed = 0;
         float speed = 0;
         int frameCounter = 0;
 
+        float maxSpeed = 0.0f;
+
         Range[] ranges;
         Report report;
 
+        DateTime last = DateTime.Now;
 
-        const string speedLabel = "Current speed: {0} km/h";
-        const string speedLabelMph = "Current speed: {0} MPH";
 
+        const string speedLabel = "Current speed: {0:0.00} km/h";
+        const string speedLabelMph = "Current speed: {0:0.00} MPH";
+
+        const string maxSpeedLabel = "Max speed: {0:0.00} km/h";
+        const string maxSpeedLabelMph = "Max speed: {0:0.00} MPH";
 
         private void ReloadRanges()
         {
@@ -74,6 +80,7 @@ namespace u2accel
         private void Reset()
         {
             frameCounter = 0;
+            maxSpeed = 0;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -81,6 +88,7 @@ namespace u2accel
             frameCounter++;
             prevSpeed = speed;
             speed = u2reader.GetSpeed() * 1.61f;
+            maxSpeed = Math.Max(maxSpeed, speed);
             foreach(Range range in ranges)
             {
                 range.Think(speed, frameCounter);
@@ -90,7 +98,12 @@ namespace u2accel
                 listBox1.Items[i] = listBox1.Items[i];
             }
 
-            label1.Text = string.Format(settings.IsKmh ? speedLabel : speedLabelMph, (int)speed);
+            var lat = (DateTime.Now - last).TotalMilliseconds;
+            label1.Text = string.Format(settings.IsKmh ? speedLabel : speedLabelMph, speed);
+            label2.Text = string.Format(settings.IsKmh ? maxSpeedLabel : maxSpeedLabelMph, maxSpeed);
+            latencyLabel.Text = string.Format("Latency {0:0.00}ms", lat);
+            latencyLabel.ForeColor = lat > 50 ? Color.Red : Color.Black;
+            last = DateTime.Now;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -128,6 +141,18 @@ namespace u2accel
         private void ReloadSettings()
         {
             settings = new Settings();
+        }
+
+        private void needForSpeedMostWantedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            u2reader = new MWReader();
+            u2reader.Init();
+        }
+
+        private void needForSpeedCarbonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            u2reader = new CReader();
+            u2reader.Init();
         }
     }
 }

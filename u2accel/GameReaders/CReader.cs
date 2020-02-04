@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace u2accel.GameReaders
+namespace u2accel
 {
     class CReader : GameReader
     {

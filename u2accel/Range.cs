@@ -38,13 +38,16 @@ namespace u2accel
             }
         }
 
+        DateTime tickStart = DateTime.MinValue;
+        DateTime tickEnd = DateTime.MinValue;
+
         public float Time
         {
             get
             {
-                if (bFrame == 0 || aFrame == 0)
+                if (tickStart == DateTime.MinValue || tickEnd == DateTime.MinValue)
                     return 0.0f;
-                return (bFrame - aFrame) / (1000.0f / tickLength);
+                return (float)(tickEnd - tickStart).TotalSeconds;//(bFrame - aFrame) / (1000.0f / tickLength);
             }
         }
 
@@ -98,6 +101,8 @@ namespace u2accel
 
         public static Range[] LoadRanges(string path, int tickLength, bool isKmh)
         {
+            if (!File.Exists(path))
+                return new Range[0];
             StreamReader sr = new StreamReader(path);
             BinaryReader reader = new BinaryReader(sr.BaseStream);
             int rangesCount = reader.ReadInt32();
@@ -122,13 +127,15 @@ namespace u2accel
 
         public void Think(float speed, int tickNumber)
         {
-            if((lastSpeed <= a) && (speed >= a) && (bFrame == 0))
+            if((lastSpeed <= a) && (speed >= a) && (tickStart == DateTime.MinValue))
             {
                 aFrame = tickNumber;
+                tickStart = DateTime.Now;
             }
-            if (lastSpeed <= b && speed >= b)
+            if (lastSpeed <= b && speed >= b && (tickEnd == DateTime.MinValue))
             {
                 LeaveFrame = tickNumber;
+                tickEnd = DateTime.Now;
             }
             lastSpeed = speed;
         }
@@ -137,6 +144,8 @@ namespace u2accel
         {
             aFrame = bFrame = 0;
             lastSpeed = 0.0f;
+            tickStart = DateTime.MinValue;
+            tickEnd = DateTime.MinValue;
         }
     }
 }

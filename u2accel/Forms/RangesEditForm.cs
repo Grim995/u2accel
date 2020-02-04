@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,8 @@ namespace u2accel
 
         private void RangesEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!Directory.Exists("ranges"))
+                Directory.CreateDirectory("ranges");
             try
             {
                 Range[] ranges = new Range[listBox1.Items.Count];
