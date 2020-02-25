@@ -10,6 +10,8 @@ Because speedrunning. We need to test some stuff, so I thought this would be a g
 ## What can it?
 
 - Supports U2
+- Supports Carbon
+- Supports Most Wanted
 - Measure acceleration
 - Make custom measuring ranges
 - Global hotkey to reset calculations
@@ -20,9 +22,10 @@ Because speedrunning. We need to test some stuff, so I thought this would be a g
 ## TODO List:
 
 - U1 support
-- MW Support
-- Carbon support
 
 ## How to use
 Just open the program, then the game. Or game then program. Doesn't matter alot.  
 Select a track and drive. If you need to reset - use Numpad0. I will add customizeable hotkey later on.
+
+## License
+MIT
